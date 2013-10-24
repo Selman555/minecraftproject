@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#BBBBBB"
+    android:paddingTop="20dp" >
+    
+    <ImageView
+        android:id="@+id/ImageView08"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_toLeftOf="@+id/ImageView12"
+        android:layout_above="@+id/ImageView12"
+        android:layout_alignRight="@+id/ImageView0"
+        android:src="@drawable/armor" />
+
+    <ImageView
+        android:id="@+id/ImageView12"
+        android:layout_width="53dp"
+        android:layout_height="53dp"
+        android:layout_marginLeft="20dp"
+        android:src="@drawable/box" />
+
+    <ImageView
+        android:id="@+id/ImageView01"
+        android:layout_width="53dp"
+        android:layout_height="53dp"
+        android:layout_toRightOf="@+id/ImageView12"
+        android:src="@drawable/box" />
+
+    <ImageView
+        android:id="@+id/ImageView02"
+        android:layout_width="53dp"
+        android:layout_height="53dp"
+        android:layout_toRightOf="@+id/ImageView01"
+        android:src="@drawable/box" />
+
+    <ImageView
+        android:id="@+id/ImageView03"
+        android:layout_width="53dp"
+        android:layout_height="53dp"
+        android:layout_alignLeft="@+id/ImageView12"
+        android:layout_below="@+id/ImageView12"
+        android:src="@drawable/box" />
+
+    <ImageView
+        android:id="@+id/ImageView04"
+        android:layout_width="53dp"
+        android:layout_height="53dp"
+        android:layout_below="@+id/ImageView01"
+        android:layout_toLeftOf="@+id/ImageView02"
+        android:src="@drawable/box" />
+
+    <ImageView
+        android:id="@+id/ImageView05"
+        android:layout_width="53dp"
+        android:layout_height="53dp"
+        android:layout_below="@+id/ImageView01"
+        android:layout_toRightOf="@+id/ImageView01"
+        android:src="@drawable/box" />
+
+    <ImageView
+        android:id="@+id/ImageView09"
+        android:layout_width="53dp"
+        android:layout_height="53dp"
+        android:layout_alignLeft="@+id/ImageView05"
+        android:layout_alignTop="@+id/ImageView06"
+        android:src="@drawable/box" />
+
+    <ImageView
+        android:id="@+id/ImageView06"
+        android:layout_width="53dp"
+        android:layout_height="53dp"
+        android:layout_alignLeft="@+id/ImageView03"
+        android:layout_below="@+id/ImageView03"
+        android:src="@drawable/box" />
+
+    <ImageView
+        android:id="@+id/ImageView10"
+        android:layout_width="53dp"
+        android:layout_height="53dp"
+        android:layout_alignTop="@+id/ImageView09"
+        android:layout_toLeftOf="@+id/ImageView09"
+        android:src="@drawable/box" />
+
+    <ImageView
+        android:id="@+id/ImageView14"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignRight="@+id/ImageView03"
+        android:layout_alignTop="@+id/ImageView03"
+        android:src="@drawable/armor" />
+
+    <ImageView
+        android:id="@+id/ImageView15"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignRight="@+id/ImageView04"
+        android:layout_alignTop="@+id/ImageView04"
+        android:src="@drawable/armor" />
+
+    <ImageView
+        android:id="@+id/ImageView16"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignRight="@+id/ImageView05"
+        android:layout_alignTop="@+id/ImageView05"
+        android:src="@drawable/armor" />
+
+    <ImageView
+        android:id="@+id/ImageView17"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignTop="@+id/ImageView06"
+        android:layout_toLeftOf="@+id/ImageView10"
+        android:src="@drawable/armor" />
+
+    <ImageView
+        android:id="@+id/ImageView18"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignRight="@+id/ImageView10"
+        android:layout_alignTop="@+id/ImageView10"
+        android:src="@drawable/armor" />
+
+    <ImageView
+        android:id="@+id/ImageView19"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignRight="@+id/ImageView09"
+        android:layout_alignTop="@+id/ImageView09"
+        android:src="@drawable/armor" />
+
+    <TextView
+        android:id="@+id/txtRecipeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/ImageView13"
+        android:layout_marginRight="18dp"
+        android:text="Ingredient layout" />
+
+    <ImageView
+        android:id="@+id/ImageView20"
+        android:layout_width="53dp"
+        android:layout_height="53dp"
+        android:layout_alignRight="@+id/txtRecipeTitle"
+        android:layout_alignTop="@+id/ImageView09"
+        android:src="@drawable/box" />
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ImageView16"
+        android:layout_alignRight="@+id/ImageView20"
+        android:text="Layout result" />
+
+    <ImageView
+        android:id="@+id/ImageView21"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignRight="@+id/ImageView20"
+        android:layout_alignTop="@+id/ImageView20"
+        android:src="@drawable/armor" />
+
+    <ImageView
+        android:id="@+id/ImageView13"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignRight="@+id/ImageView02"
+        android:layout_alignTop="@+id/ImageView02"
+        android:src="@drawable/armor" />
+
+    <ImageView
+        android:id="@+id/ImageView11"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignTop="@+id/ImageView01"
+        android:layout_toLeftOf="@+id/ImageView02"
+        android:src="@drawable/armor" />
+
+    <ImageView
+        android:id="@+id/ImageView07"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignRight="@+id/ImageView12"
+        android:layout_alignTop="@+id/ImageView12"
+        android:src="@drawable/armor" />
+        
+</RelativeLayout>

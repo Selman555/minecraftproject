@@ -1,0 +1,77 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/minecraft_landscape"
+    android:alpha="0.75"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+
+    <TextView
+        android:id="@+id/txtAppName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dip"
+        android:layout_centerHorizontal="true"
+        android:text="@string/app_name_readable"
+        android:textSize="32sp"
+        android:textColor="@android:color/white" />
+    
+    <Button
+        android:id="@+id/btnCrafting"
+        android:layout_width="200dip"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/txtAppName"
+        android:layout_marginLeft="8dip"
+        android:layout_marginTop="25dip"
+        android:alpha="0.80"
+        android:background="@drawable/button_selector"
+        android:onClick="craftingButtonClicked"
+        android:text="@string/crafting"
+        android:textColor="@android:color/white" />
+    
+    <Button
+        android:id="@+id/btnItemList"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtAppName"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="8dip"
+        android:layout_marginTop="25dip"
+        android:background="@drawable/button_selector"
+        android:alpha="0.80"
+        android:text="@string/itemlist"
+        android:textColor="@android:color/white"
+        android:onClick="itemListButtonClicked" />
+
+    <Button
+        android:id="@+id/btnServerCommands"
+        android:layout_width="200dip"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnCrafting"
+        android:layout_below="@+id/btnCrafting"
+        android:layout_marginTop="20dip"
+        android:alpha="0.80"
+        android:background="@drawable/button_selector"
+        android:onClick="serverCommandsButtonClicked"
+        android:text="@string/servercommands"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/btnVideos"
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btnServerCommands"
+        android:layout_alignBottom="@+id/btnServerCommands"
+        android:layout_alignLeft="@+id/btnItemList"
+        android:alpha="0.80"
+        android:background="@drawable/button_selector"
+        android:onClick="videosButtonClicked"
+        android:text="@string/videos"
+        android:textColor="@android:color/white" />
+
+</RelativeLayout>
