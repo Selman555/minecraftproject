@@ -7,7 +7,8 @@
     <string name="itemlist">Item list</string>
     <string name="servercommands">Server commands</string>
     <string name="videos">Videos</string>
-    <string name="recipecategory">Category image</string>
+    <string name="imgdescription">Item image</string>
     <string name="recipeimage">Recipe image</string>
+    <string name="recipes">Recipes</string>
 	
 </resources>

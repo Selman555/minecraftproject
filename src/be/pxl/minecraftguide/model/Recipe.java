@@ -3,14 +3,14 @@ package be.pxl.minecraftguide.model;
 public class Recipe {
     private int _id;
     private int recipeCategory;
-    private String recipeImageName;
+    private int recipeImageID;
     private String recipeDescription;
     private int[] recipeLocations;
 
-    public Recipe(int recipeID, int recipeCategory, String recipeImageName, String recipeDescription, int[] recipeLocations) {
+    public Recipe(int recipeID, int recipeCategory, int recipeImageID, String recipeDescription, int[] recipeLocations) {
         this._id = recipeID;
         this.recipeCategory = recipeCategory;
-        this.recipeImageName = recipeImageName;
+        this.recipeImageID = recipeImageID;
         this.recipeDescription = recipeDescription;
         this.recipeLocations = recipeLocations;
     }
@@ -22,23 +22,23 @@ public class Recipe {
     public void setRecipeID(int recipeID) {
         this._id = recipeID;
     }
+    
+    public int getRecipeImageID() {
+		return recipeImageID;
+	}
 
-    public int getRecipeCategory() {
+	public void setRecipeImageID(int recipeImageID) {
+		this.recipeImageID = recipeImageID;
+	}
+
+	public int getRecipeCategory() {
         return recipeCategory;
     }
 
     public void setRecipeCategory(int recipeCategory) {
         this.recipeCategory = recipeCategory;
     }
-
-    public String getRecipeImageName() {
-        return recipeImageName;
-    }
-
-    public void setRecipeImageName(String recipeImageName) {
-        this.recipeImageName = recipeImageName;
-    }
-
+    
     public String getRecipeDescription() {
         return recipeDescription;
     }

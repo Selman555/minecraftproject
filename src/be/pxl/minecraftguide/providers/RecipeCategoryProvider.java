@@ -15,7 +15,7 @@ import be.pxl.minecraftguide.model.Recipe;
 
 public class RecipeCategoryProvider extends ContentProvider {
 	public static final String COL_CATID = "_ID";
-	public static final String COL_CATIMG = "categoryImage";
+	public static final String COL_CATIMG = "categoryImageID";
 	public static final String COL_CATDESC = "categoryDescription";
 	
 	public static final String[] columnNames = { COL_CATID, COL_CATIMG, COL_CATDESC };

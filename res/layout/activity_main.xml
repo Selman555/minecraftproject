@@ -45,8 +45,7 @@
         android:background="@drawable/button_selector"
         android:alpha="0.80"
         android:text="@string/itemlist"
-        android:textColor="@android:color/white"
-        android:onClick="itemListButtonClicked" />
+        android:textColor="@android:color/white" />
     
     <Button
         android:id="@+id/btnServerCommands"
@@ -58,8 +57,7 @@
         android:background="@drawable/button_selector"
         android:alpha="0.80"
         android:text="@string/servercommands"
-        android:textColor="@android:color/white"
-        android:onClick="serverCommandsButtonClicked" />
+        android:textColor="@android:color/white" />
     
     <Button
         android:id="@+id/btnVideos"
@@ -70,7 +68,6 @@
         android:background="@drawable/button_selector"
         android:alpha="0.80"
         android:text="@string/videos"
-        android:textColor="@android:color/white"
-        android:onClick="videosButtonClicked" />
+        android:textColor="@android:color/white" />
 
 </RelativeLayout>

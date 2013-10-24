@@ -2,12 +2,12 @@ package be.pxl.minecraftguide.model;
 
 public class Category {
 	private int _id;
-	private int categoryImage;
+	private int categoryImageID;
 	private String categoryDescription;
 	
 	public Category(int _id, int categoryImage, String categoryDescription) {
 		this._id = _id;
-		this.categoryImage = categoryImage;
+		this.categoryImageID = categoryImage;
 		this.categoryDescription = categoryDescription;
 	}
 	public int get_id() {
@@ -17,10 +17,10 @@ public class Category {
 		this._id = _id;
 	}
 	public int getCategoryImage() {
-		return categoryImage;
+		return categoryImageID;
 	}
 	public void setCategoryImage(int categoryImage) {
-		this.categoryImage = categoryImage;
+		this.categoryImageID = categoryImage;
 	}
 	public String getCategoryDescription() {
 		return categoryDescription;

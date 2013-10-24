@@ -2,6 +2,7 @@ package be.pxl.minecraftguide;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -10,7 +11,10 @@ public class MainActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		setContentView(R.layout.activity_main);
+		if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+			setContentView(R.layout.activity_main);
+		else
+			setContentView(R.layout.activity_main_landscape);
 		super.onCreate(savedInstanceState);
 		
 	}
