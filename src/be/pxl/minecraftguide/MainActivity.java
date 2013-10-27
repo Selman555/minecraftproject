@@ -30,5 +30,10 @@ public class MainActivity extends Activity {
 		Intent crafting = new Intent(getApplicationContext(), Crafting.class);
         MainActivity.this.startActivity(crafting);
 	}
+	
+	public void videosButtonClicked(View view) {
+		Intent videos = new Intent(getApplicationContext(), Videos.class);
+        MainActivity.this.startActivity(videos);
+	}
 
 }

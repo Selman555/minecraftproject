@@ -14,5 +14,6 @@
     <string name="ingredientsresult">Item acquired</string>
     <string name="boxdesc">Ingredient box</string>
     <string name="relatedrecipes">This recipe as an ingredient</string>
+    
 	
 </resources>

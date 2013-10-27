@@ -68,6 +68,7 @@
         android:background="@drawable/button_selector"
         android:alpha="0.80"
         android:text="@string/videos"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"
+        android:onClick="videosButtonClicked" />
 
 </RelativeLayout>

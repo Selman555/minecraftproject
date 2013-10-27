@@ -37,6 +37,12 @@
                 android:configChanges="orientation|keyboardHidden"
                 android:value=".MainActivity" />
         </activity>
+        <activity android:name="Videos" android:label="@string/videos">
+        	<meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:configChanges="orientation|keyboardHidden"
+                android:value=".MainActivity" />
+        </activity>
         <activity
             android:name="be.pxl.minecraftguide.Recipes"
             android:label="@string/recipes" >
