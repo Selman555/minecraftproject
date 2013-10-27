@@ -5,14 +5,16 @@ public class Recipe {
     private int recipeCategory;
     private int recipeImageID;
     private String recipeDescription;
-    private int[] recipeLocations;
+    private String recipeLocations;
+    private String usedImages;
 
-    public Recipe(int recipeID, int recipeCategory, int recipeImageID, String recipeDescription, int[] recipeLocations) {
+    public Recipe(int recipeID, int recipeCategory, int recipeImageID, String recipeDescription, String recipeLocations, String usedImages) {
         this._id = recipeID;
         this.recipeCategory = recipeCategory;
         this.recipeImageID = recipeImageID;
         this.recipeDescription = recipeDescription;
         this.recipeLocations = recipeLocations;
+        this.usedImages = usedImages;
     }
 
     public int getRecipeID() {
@@ -47,11 +49,19 @@ public class Recipe {
         this.recipeDescription = recipeDescription;
     }
 
-    public int[] getRecipeLocations() {
+    public String getRecipeLocations() {
         return recipeLocations;
     }
 
-    public void setRecipeLocations(int[] recipeLocations) {
+    public void setRecipeLocations(String recipeLocations) {
         this.recipeLocations = recipeLocations;
     }
+
+	public String getUsedImages() {
+		return usedImages;
+	}
+
+	public void setUsedImages(String usedImages) {
+		this.usedImages = usedImages;
+	}
 }

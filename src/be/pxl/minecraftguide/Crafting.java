@@ -13,9 +13,9 @@ import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import be.pxl.minecraftguide.model.Recipe;
+import android.widget.TextView;
+import be.pxl.minecraftguide.events.SensorActivity;
 import be.pxl.minecraftguide.providers.RecipeCategoryProvider;
-import be.pxl.minecraftguide.events.SensorActivity;;
 
 public class Crafting extends ListActivity {
 	private SimpleCursorAdapter adaptor;
@@ -64,18 +64,11 @@ public class Crafting extends ListActivity {
 		getListView().setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View row, int rowIndex,
-					long arg3) {
-				// TODO Auto-generated method stub
-				ContentResolver cr = getContentResolver();
-				Cursor cursor = cr.query(RecipeCategoryProvider.CONTENT_URI, null, Integer.toString(rowIndex), null, null);
-				String[] from = {RecipeCategoryProvider.COL_CATID, RecipeCategoryProvider.COL_CATIMG, RecipeCategoryProvider.COL_CATDESC};
-				int[] to = { R.id.txtID, R.id.imgItem, R.id.txtDescription };
-				SimpleCursorAdapter recipeAdapter = new SimpleCursorAdapter(getApplicationContext(), R.layout.rowview, cursor, from, to, 0);
-				
-				Intent recipeDetailsIntent = new Intent(getApplicationContext(), Recipes.class);
-				recipeDetailsIntent.putExtra("listIndex", rowIndex);
-				startActivity(recipeDetailsIntent);
+			public void onItemClick(AdapterView<?> arg0, View row, int rowIndex, long arg3) {				
+				Intent recipeCategoryIntent = new Intent(getApplicationContext(), Recipes.class);
+				TextView txtID = (TextView)row.findViewById(R.id.txtID);
+				recipeCategoryIntent.putExtra("listIndex", Integer.parseInt(txtID.getText().toString()));
+				startActivity(recipeCategoryIntent);
 			}
 			
 		});

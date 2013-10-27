@@ -45,6 +45,14 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="be.pxl.minecraftguide.RecipeDetails"
+            android:label="@string/recipes" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <!-- <activity android:name="Recipes" android:label="@string/recipes">
         	<meta-data
                 android:name="android.support."

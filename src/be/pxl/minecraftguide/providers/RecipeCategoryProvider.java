@@ -11,7 +11,6 @@ import android.database.MatrixCursor.RowBuilder;
 import android.net.Uri;
 import be.pxl.minecraftguide.R;
 import be.pxl.minecraftguide.model.Category;
-import be.pxl.minecraftguide.model.Recipe;
 
 public class RecipeCategoryProvider extends ContentProvider {
 	public static final String COL_CATID = "_ID";

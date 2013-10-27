@@ -10,5 +10,9 @@
     <string name="imgdescription">Item image</string>
     <string name="recipeimage">Recipe image</string>
     <string name="recipes">Recipes</string>
+    <string name="ingredients">Ingredients required</string>
+    <string name="ingredientsresult">Item acquired</string>
+    <string name="boxdesc">Ingredient box</string>
+    <string name="relatedrecipes">This recipe as an ingredient</string>
 	
 </resources>

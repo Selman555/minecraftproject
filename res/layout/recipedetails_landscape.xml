@@ -18,8 +18,8 @@
         android:id="@+id/imgBox1"
         android:layout_width="52dp"
         android:layout_height="52dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
         android:layout_below="@id/txtIngredients"
         android:src="@drawable/box"
         android:contentDescription="@string/boxdesc" />
@@ -28,8 +28,8 @@
         android:id="@+id/imgIngr1"
         android:layout_width="49dp"
         android:layout_height="49dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="32dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="22dp"
         android:layout_below="@id/txtIngredients"
         android:src="@drawable/baked_potato"
         android:contentDescription="@string/boxdesc" />
@@ -186,25 +186,13 @@
         android:src="@drawable/baked_potato"
         android:contentDescription="@string/boxdesc" />
 
-    
-    
-    <TextView
-        android:id="@+id/txtResult"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/txtIngredients"
-        android:layout_alignBottom="@id/txtIngredients"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="20dp"
-        android:text="@string/ingredientsresult" />
-
     <ImageView
         android:id="@+id/imgResultBox"
         android:layout_width="52dp"
         android:layout_height="52dp"
         android:layout_alignRight="@+id/txtResult"
         android:layout_below="@+id/imgBox3"
-        android:layout_marginRight="14dp"
+        android:layout_marginRight="24dp"
         android:src="@drawable/box"
         android:contentDescription="@string/ingredientsresult" />
 
@@ -214,24 +202,39 @@
         android:layout_height="49dp"
         android:layout_alignRight="@+id/txtResult"
         android:layout_below="@+id/imgBox3"
-        android:layout_marginRight="15dp"
+        android:layout_marginRight="25dp"
         android:src="@drawable/baked_potato"
         android:contentDescription="@string/ingredientsresult" />
-    
-    <TextView
-        android:id="@+id/txtRelatedRecipes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/txtIngredients"
-        android:layout_below="@id/imgBox7"
-        android:layout_marginTop="10dp"
-        android:text="@string/relatedrecipes" />
-    
+
     <ListView
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@id/txtRelatedRecipes"
-        android:transcriptMode="alwaysScroll" />
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/txtRelatedRecipes"
+        android:layout_toRightOf="@+id/imgResultBox"
+        android:transcriptMode="alwaysScroll" >
+
+    </ListView>
+
+    <TextView
+        android:id="@+id/txtRelatedRecipes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/txtResult"
+        android:layout_alignBottom="@+id/txtResult"
+        android:layout_alignLeft="@android:id/list"
+        android:layout_marginLeft="48dp"
+        android:text="@string/relatedrecipes" />
+
+    <TextView
+        android:id="@+id/txtResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/txtIngredients"
+        android:layout_alignBottom="@+id/txtIngredients"
+        android:layout_marginLeft="18dp"
+        android:layout_toRightOf="@+id/imgBox3"
+        android:text="@string/ingredientsresult" />
     
 </RelativeLayout>

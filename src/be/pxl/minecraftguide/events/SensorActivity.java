@@ -38,7 +38,7 @@ public class SensorActivity implements SensorEventListener {
 	        	//Rechts
 	        }
 
-	        if (yChange > 12){
+		    if (yChange > 12){
 		        	listView.smoothScrollBy(listView.getHeight() * adaptor.getCount(), 1000);
 		        	listView.postDelayed(new Runnable() {
 		                @Override
@@ -47,17 +47,17 @@ public class SensorActivity implements SensorEventListener {
 		                	listView.setSelection(adaptor.getCount() - 1);
 		                }
 		            }, 500);
-	        }
-	        else if (yChange < -12){
-	        	listView.smoothScrollBy(listView.getHeight() * adaptor.getCount(), 1000);
-	        	listView.postDelayed(new Runnable() {
-	                @Override
-	                public void run() {
-	                	listView.smoothScrollBy(0, 0); //Geanimeerd scrollen naar eerste positie positie
-	                	listView.setSelection(0);
-	                }
-	            }, 500);
-	        }
+		    }
+		    else if (yChange < -12){
+		    	listView.smoothScrollBy(listView.getHeight() * adaptor.getCount(), 1000);
+		    	listView.postDelayed(new Runnable() {
+		            @Override
+		            public void run() {
+		            	listView.smoothScrollBy(0, 0); //Geanimeerd scrollen naar eerste positie positie
+		            	listView.setSelection(0);
+		            }
+		        }, 500);
+		    }
 	    }
 		
 	}
