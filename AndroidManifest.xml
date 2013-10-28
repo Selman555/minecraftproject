@@ -69,5 +69,8 @@
     
     <!-- Internet toegang permissie -->
     <uses-permission android:name="android.permission.INTERNET" />
+    
+    <!-- Network State Permissions -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 </manifest>

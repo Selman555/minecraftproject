@@ -405,7 +405,7 @@ public final class R {
         public static final int zombie_head=0x7f02017d;
     }
     public static final class id {
-        public static final int action_settings=0x7f080021;
+        public static final int action_settings=0x7f080022;
         public static final int btnCrafting=0x7f080001;
         public static final int btnItemList=0x7f080002;
         public static final int btnServerCommands=0x7f080003;
@@ -431,6 +431,7 @@ public final class R {
         public static final int imgItem=0x7f08001f;
         public static final int imgResult=0x7f08001b;
         public static final int imgResultBox=0x7f08001a;
+        public static final int listView1=0x7f080021;
         public static final int rowView=0x7f08001d;
         public static final int textView1=0x7f080000;
         public static final int txtAppName=0x7f080005;
