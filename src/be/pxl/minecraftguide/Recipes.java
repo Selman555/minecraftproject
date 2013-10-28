@@ -32,6 +32,14 @@ public class Recipes extends ListActivity {
 		else
 			setContentView(R.layout.listview_landscape);
 		
+		while (RecipeProvider.busy) {
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		Bundle extras = getIntent().getExtras();
 		String id = Integer.toString(extras.getInt("listIndex"));
 		

@@ -1,14 +1,16 @@
 package be.pxl.minecraftguide.model;
 
+import android.graphics.Bitmap;
+
 public class Recipe {
     private int _id;
     private int recipeCategory;
-    private int recipeImageID;
+    private String recipeImageID;
     private String recipeDescription;
     private String recipeLocations;
     private String usedImages;
 
-    public Recipe(int recipeID, int recipeCategory, int recipeImageID, String recipeDescription, String recipeLocations, String usedImages) {
+    public Recipe(int recipeID, int recipeCategory, String recipeImageID, String recipeDescription, String recipeLocations, String usedImages) {
         this._id = recipeID;
         this.recipeCategory = recipeCategory;
         this.recipeImageID = recipeImageID;
@@ -25,11 +27,11 @@ public class Recipe {
         this._id = recipeID;
     }
     
-    public int getRecipeImageID() {
+    public String getRecipeImageID() {
 		return recipeImageID;
 	}
 
-	public void setRecipeImageID(int recipeImageID) {
+	public void setRecipeImageID(String recipeImageID) {
 		this.recipeImageID = recipeImageID;
 	}
 

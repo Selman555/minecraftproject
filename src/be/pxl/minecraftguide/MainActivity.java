@@ -1,5 +1,6 @@
 package be.pxl.minecraftguide;
 
+import be.pxl.minecraftguide.providers.RecipeProvider;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -29,6 +30,12 @@ public class MainActivity extends Activity {
 	public void craftingButtonClicked(View view) {
 		Intent crafting = new Intent(getApplicationContext(), Crafting.class);
         MainActivity.this.startActivity(crafting);
+        RecipeProvider.GetItems();
+	}
+	
+	public void commandsButtonClicked(View view) {
+		Intent commands = new Intent(getApplicationContext(), Commands.class);
+		MainActivity.this.startActivity(commands);
 	}
 	
 	public void videosButtonClicked(View view) {

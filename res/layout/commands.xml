@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    tools:context=".Commands" >
+    
+    <fragment android:name="com.example.news.ArticleListFragment"
+            android:id="@+id/commandslist"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            tools:layout="@layout/commandslist" />
+    <fragment android:name="be.pxl.minecraftguide.CommandDetails"
+            android:id="@+id/commanddetails"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            tools:layout="@layout/commanddetails" />
+    
+</LinearLayout>

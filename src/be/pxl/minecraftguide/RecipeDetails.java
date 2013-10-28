@@ -2,8 +2,10 @@ package be.pxl.minecraftguide;
 
 import android.app.ListActivity;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.widget.SimpleCursorAdapter;
@@ -15,7 +17,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import be.pxl.minecraftguide.providers.RecipeProvider;
 
 public class RecipeDetails extends ListActivity {
-
+	private Resources res;
+	private Context context;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
@@ -45,8 +49,8 @@ public class RecipeDetails extends ListActivity {
 			imgResult.setImageResource(cursor.getInt(2));
 			setTitle(cursor.getString(3));
 			
-			int[] imgLocations = createIntArrayFromString(cursor.getString(4));
-			int[] imgUsedImages = createIntArrayFromString(cursor.getString(5));
+			int[] imgLocations = createIntArrayFromString(cursor.getString(4), true);
+			int[] imgUsedImages = createIntArrayFromString(cursor.getString(5), false);
 			imgIngr1.setImageResource(imgUsedImages[imgLocations[0]]);
 			imgIngr2.setImageResource(imgUsedImages[imgLocations[1]]);
 			imgIngr3.setImageResource(imgUsedImages[imgLocations[2]]);
@@ -78,7 +82,7 @@ public class RecipeDetails extends ListActivity {
 		});
 	}
 	
-	public int[] createIntArrayFromString(String values) {
+	public int[] createIntArrayFromString(String values, boolean parse) {
 		String[] arrSplittedValues = values.split(",");
 		int[] arrIntArray = new int[arrSplittedValues.length];
 		

@@ -1,17 +1,40 @@
 package be.pxl.minecraftguide.providers;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONObject;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import be.pxl.minecraftguide.R;
+import be.pxl.minecraftguide.RecipeDetails;
 import be.pxl.minecraftguide.model.Recipe;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.Entity;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.database.MatrixCursor.RowBuilder;
 import android.net.Uri;
+import android.util.JsonToken;
+import android.util.Log;
 
 public class RecipeProvider extends ContentProvider {
 	public static final String COL_RECID = "_ID";
@@ -25,7 +48,12 @@ public class RecipeProvider extends ContentProvider {
 	
 	public static final String AUTHORITY = "be.pxl.minecraftguide.providers.recipeprovider";
 	public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/*");
-	private List<Recipe> recipesList;
+	public static boolean busy = true;
+	private static List<Recipe> recipesList;
+	private Resources res;
+	private Context context;
+	
+	
 	
 	@Override
 	public int delete(Uri arg0, String arg1, String[] arg2) {
@@ -44,8 +72,10 @@ public class RecipeProvider extends ContentProvider {
 	}
 	@Override
 	public boolean onCreate() {
-		recipesList = new ArrayList<Recipe>();
-		//Ores & ingots
+		res = this.getContext().getResources();
+		context = this.getContext();
+		
+		/*//Ores & ingots
         recipesList.add(new Recipe(1, 11, R.drawable.diamond_ingot, "Diamond ingot",
         		"0,0,0,0,0,0,0,0,1", String.format("%d,%d", R.drawable.air, R.drawable.diamond_ore )));
         recipesList.add(new Recipe(2, 11, R.drawable.iron_ingot, "Iron ingot",
@@ -83,7 +113,7 @@ public class RecipeProvider extends ContentProvider {
         recipesList.add(new Recipe(17, 2, R.drawable.gold_helmet, "Helmet (Gold)",
         		"1,1,1,1,0,1,0,0,0", String.format("%d,%d", R.drawable.air, R.drawable.gold_ingot )));
         recipesList.add(new Recipe(18, 2, R.drawable.iron_helmet, "Helmet (Iron)",
-        		"1,1,1,1,0,1,0,0,0", String.format("%d,%d", R.drawable.air, R.drawable.iron_ingot )));
+        		"1,1,1,1,0,1,0,0,0", String.format("%d,%d", R.drawable.air, R.drawable.iron_ingot )));*/
 		return true;
 	}
 	
@@ -99,7 +129,7 @@ public class RecipeProvider extends ContentProvider {
 					rb = mxCur.newRow();
 					rb.add(rcp.getRecipeID());
 					rb.add(rcp.getRecipeCategory());
-					rb.add(rcp.getRecipeImageID());
+					rb.add(res.getIdentifier(rcp.getRecipeImageID(), "drawable", context.getPackageName()));
 					rb.add(rcp.getRecipeDescription());
 				}
 			}
@@ -109,7 +139,7 @@ public class RecipeProvider extends ContentProvider {
 					rb = mxCur.newRow();
 					rb.add(rcp.getRecipeID());
 					rb.add(rcp.getRecipeCategory());
-					rb.add(rcp.getRecipeImageID());
+					rb.add(res.getIdentifier(rcp.getRecipeImageID(), "drawable", context.getPackageName()));
 					rb.add(rcp.getRecipeDescription());
 				}
 			}
@@ -119,10 +149,10 @@ public class RecipeProvider extends ContentProvider {
 					rb = mxCur.newRow();
 					rb.add(rcp.getRecipeID());
 					rb.add(rcp.getRecipeCategory());
-					rb.add(rcp.getRecipeImageID());
+					rb.add(res.getIdentifier(rcp.getRecipeImageID(), "drawable", context.getPackageName()));
 					rb.add(rcp.getRecipeDescription());
 					rb.add(rcp.getRecipeLocations());
-					rb.add(rcp.getUsedImages());
+					rb.add(createResourceIDStringFromString(rcp.getUsedImages()));
 				}
 			}
 		} else {
@@ -130,7 +160,7 @@ public class RecipeProvider extends ContentProvider {
 				rb = mxCur.newRow();
 				rb.add(rcp.getRecipeID());
 				rb.add(rcp.getRecipeCategory());
-				rb.add(rcp.getRecipeImageID());
+				rb.add(res.getIdentifier(rcp.getRecipeImageID(), "drawable", context.getPackageName()));
 				rb.add(rcp.getRecipeDescription());
 			}
 		}
@@ -152,4 +182,59 @@ public class RecipeProvider extends ContentProvider {
 		return 0;
 	}
 	
+	public static void GetItems() {
+		new Thread(new Runnable() {
+		    //Thread to stop network calls on the UI thread
+		    public void run() {
+				BufferedReader reader = null;
+				HttpClient client = new DefaultHttpClient();
+		
+				try {
+					// create GET request
+					HttpGet httpGet = new HttpGet("http://192.168.0.251:8084/MinecraftRestServer/webresources/Items");
+					// execute GET request
+					HttpResponse response = client.execute(httpGet);
+					// check response
+					StatusLine statusLine = response.getStatusLine();
+					int statusCode = statusLine.getStatusCode();
+					if (statusCode == 200) { // response OK
+						// Response uitlezen
+						HttpEntity entity = response.getEntity();
+						// Inputstream om uit te lezen
+						InputStream content = entity.getContent();
+						// BufferedReader van de inputstream
+						reader = new BufferedReader(new InputStreamReader(content));
+						Gson gson = new Gson(); //Nieuwe Gson instantie
+						//Nieuwe receptenlijst aanmaken door gson te gebruiken:
+						//TypeToken omschrijft de vormgeving van de ontvangen json array
+						recipesList = gson.fromJson(reader, new TypeToken<List<Recipe>>(){}.getType());
+					} else {
+						Log.e(getClass().getName().toString(), "Failed to download file");
+					}
+				} catch (ClientProtocolException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				} catch (IllegalArgumentException iae) {
+					iae.printStackTrace();
+				} finally {
+					busy = false;
+				}
+		    }
+		}).start();
+	}
+	
+	public String createResourceIDStringFromString(String values) {
+		String[] arrSplittedValues = values.split(",");
+		String resultString = "";
+		
+		for (int counter = 0; counter < arrSplittedValues.length; counter++) {
+			resultString += res.getIdentifier(arrSplittedValues[counter], "drawable", context.getPackageName());
+			if (counter != arrSplittedValues.length - 1) {
+				resultString += ",";
+			}
+		}
+		
+		return resultString;
+	}
 }
