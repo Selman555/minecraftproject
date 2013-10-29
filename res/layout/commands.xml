@@ -5,9 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:baselineAligned="false"
+    android:id="@+id/commandsLayout"
     tools:context=".Commands" >
     
-    <fragment android:name="com.example.news.ArticleListFragment"
+    <fragment 
+        	android:name="be.pxl.minecraftguide.CommandsList"
             android:id="@+id/commandslist"
             android:layout_weight="1"
             android:layout_width="0dp"

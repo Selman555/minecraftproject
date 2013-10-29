@@ -1,31 +1,29 @@
-package be.pxl.minecraftguide;
+package be.pxl.minecraftguide.providers;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import be.pxl.minecraftguide.model.Command;
-import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
+import android.content.ContentProvider;
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.MatrixCursor;
+import android.database.MatrixCursor.RowBuilder;
+import android.net.Uri;
 
-public class Commands extends FragmentActivity implements CommandsList.OnListItemSelectedListener {
-	//____________BRON: http://developer.android.com/training/basics/fragments/communicating.html
-	private List<Command> commands; //Lijst van alle bestaande commandos
-	private static String[][] detailValues; //Lijst van alle waarden voor het detailgedeelte
-	public static String[] listValues; //Lijst van alle waarden voor de lijst
+public class CommandsProvider extends ContentProvider {
+	public static final String COL_COMID = "_id";
+	public static final String COL_COMCAT = "commandCategory";
+	public static final String COL_COMTITLE = "commandTitle";
+	public static final String COL_COMDESC = "commandDescription";
+	
+	private static final String[] columnNames = {COL_COMID, COL_COMCAT, COL_COMTITLE, COL_COMDESC };
+	
+	public static final String AUTHORITY = "be.pxl.minecraftguide.providers.commandsprovider";
+	public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/*");
+	
+	private List<Command> commands;
 	
 	@Override
-	protected void onCreate(Bundle arg0) {
-		super.onCreate(arg0);
-		createCommands();
-		setContentView(R.layout.commands);
-	}
-	
-	/***
-	 * Maakt de volledige lijst met commando's aan en splitst deze in lijst en detailwaarden
-	 */
-	public void createCommands() {
-		commands = new ArrayList<Command>();
+	public boolean onCreate() {
 		commands.add(new Command(1, "Chat commands", "melp, ? [page, commandname]",
 				"Shows a list of available commands per page or further information to the commandname." +
 				"\r\nNote: the multiplayer-only commands are not listed in single-player games, even when open to LAN players."));
@@ -72,42 +70,47 @@ public class Commands extends FragmentActivity implements CommandsList.OnListIte
 				"Toggles rain and snow."));
 		commands.add(new Command(17, "Environment commands", "weather (clear | rain | thunder) [seconds]",
 				"Changes the weather for the specified duration."));
-		
-		listValues = new String[commands.size()];
-		detailValues = new String[commands.size()][2];
-		
-		for (int counter = 0; counter < commands.size(); counter++) {
-			Command command = commands.get(counter);
-			listValues[counter] = command.getCommandTitle();
-			detailValues[counter][0] = command.getCommandTitle();
-			detailValues[counter][1] = command.getCommandDescription();
-		}
+		return true;
 	}
 
-	
 	@Override
-	public void onListItemSelected(int position) {
-		CommandDetails details = (CommandDetails) getSupportFragmentManager().findFragmentById(R.id.commanddetails);
-		if (details != null) {
-			details.updateArticleView(detailValues[position]);
-		} else {
-			// Otherwise, we're in the one-pane layout and must swap frags...
-
-            // Create fragment and give it an argument for the selected article
-            details = new CommandDetails();
-            Bundle args = new Bundle();
-            args.putStringArray("detail", detailValues[position]);
-            details.setArguments(args);
-        
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-            // Replace whatever is in the fragment_container view with this fragment,
-            // and add the transaction to the back stack so the user can navigate back
-            transaction.replace(R.id.commanddetails, details);
-            transaction.addToBackStack(null);
-
-            // Commit the transaction
-            transaction.commit();
+	public Cursor query(Uri uri, String[] projection, String category, String[] selectionArgs, String sortOrder) {
+		MatrixCursor mxCur = new MatrixCursor(columnNames);
+		RowBuilder rb;
+		
+		for (Command com : commands) {
+			if (com.getCommandCategory() == category) {
+				rb = mxCur.newRow();
+				rb.add(com.get_id());
+				rb.add(com.getCommandTitle());
+				rb.add(com.getCommandDescription());
+			}
 		}
+		return mxCur;
+	}
+
+	@Override
+	public int delete(Uri uri, String selection, String[] selectionArgs) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String getType(Uri uri) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Uri insert(Uri uri, ContentValues values) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int update(Uri uri, ContentValues values, String selection,
+			String[] selectionArgs) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
