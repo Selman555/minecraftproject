@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rowView"
+    android:layout_width="match_parent"
+    android:layout_height="65sp"
+    android:background="@drawable/listview_selector" >
+    
+    <TextView
+        android:id="@+id/txtID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:textColor="@android:color/black" />
+    
+    <ImageView
+        android:id="@+id/imgItem"
+        android:layout_width="wrap_content"
+        android:layout_height="55sp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/ic_launcher"
+        android:contentDescription="@string/imgdescription" />
+
+    <TextView
+        android:id="@+id/txtDescription"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/imgItem"
+		android:gravity="center"
+		android:background="#99FFFFFF"
+        android:textSize="20sp"
+        android:textColor="@android:color/black" />
+    
+    <TextView
+        android:id="@+id/txtURL"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtDescription"
+        android:layout_toRightOf="@id/imgItem"
+        android:background="#99FFFFFF"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:visibility="gone" />
+	
+</RelativeLayout>

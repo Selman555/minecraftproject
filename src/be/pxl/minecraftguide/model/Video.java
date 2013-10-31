@@ -1,38 +1,41 @@
 package be.pxl.minecraftguide.model;
 
 public class Video {
-
-	public int icon;
-    public String title;
-    public String text;
-        
-	public Video(int icon, String title, String text) {
-        super();
-        this.icon = icon;
-        this.title = title;
-        this.text = text;
-    }
-    public int getIcon() {
-		return icon;
+	private int _id;
+	private int videoImageID;
+	private String videoDescription;
+	private String videoURL;
+	
+	public Video(int _id, int videoImageID, String videoDescription, String videoURL) {
+		super();
+		this._id = _id;
+		this.videoImageID = videoImageID;
+		this.videoDescription = videoDescription;
+		this.videoURL = videoURL;
 	}
-
-	public void setIcon(int icon) {
-		this.icon = icon;
+	public String getVideoURL() {
+		return videoURL;
 	}
-
-	public String getTitle() {
-		return title;
+	public void setVideoURL(String videoURL) {
+		this.videoURL = videoURL;
 	}
-
-	public void setTitle(String title) {
-		this.title = title;
+	public int get_id() {
+		return _id;
 	}
-
-	public String getText() {
-		return text;
+	public void set_id(int _id) {
+		this._id = _id;
 	}
-
-	public void setText(String text) {
-		this.text = text;
+	public int getVideoImageID() {
+		return videoImageID;
 	}
+	public void setVideoImageID(int videoImageID) {
+		this.videoImageID = videoImageID;
+	}
+	public String getVideoDescription() {
+		return videoDescription;
+	}
+	public void setVideoDescription(String videoDescription) {
+		this.videoDescription = videoDescription;
+	} 
+	
 }

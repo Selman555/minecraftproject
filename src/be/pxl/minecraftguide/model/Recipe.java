@@ -1,7 +1,5 @@
 package be.pxl.minecraftguide.model;
 
-import android.graphics.Bitmap;
-
 public class Recipe {
     private int _id;
     private int recipeCategory;

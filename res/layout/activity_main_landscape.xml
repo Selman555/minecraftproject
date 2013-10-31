@@ -57,7 +57,7 @@
         android:layout_marginTop="20dip"
         android:alpha="0.80"
         android:background="@drawable/button_selector"
-        android:onClick="serverCommandsButtonClicked"
+        android:onClick="commandsButtonClicked"
         android:text="@string/servercommands"
         android:textColor="@android:color/white" />
 

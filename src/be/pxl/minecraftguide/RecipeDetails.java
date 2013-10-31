@@ -2,23 +2,19 @@ package be.pxl.minecraftguide;
 
 import android.app.ListActivity;
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 import be.pxl.minecraftguide.providers.RecipeProvider;
 
 public class RecipeDetails extends ListActivity {
-	private Resources res;
-	private Context context;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

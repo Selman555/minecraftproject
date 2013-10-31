@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
 import be.pxl.minecraftguide.events.SensorActivity;
@@ -40,6 +41,12 @@ public class Recipes extends ListActivity {
 				e.printStackTrace();
 			}
 		}
+		if (RecipeProvider.errorMessage != null) {
+			Toast notice = Toast.makeText(getApplicationContext(), RecipeProvider.errorMessage, Toast.LENGTH_LONG);
+			notice.show();
+			finish();
+		}
+		
 		Bundle extras = getIntent().getExtras();
 		String id = Integer.toString(extras.getInt("listIndex"));
 		
