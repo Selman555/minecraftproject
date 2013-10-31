@@ -1,59 +1,63 @@
 package be.pxl.minecraftguide;
 
-import java.util.ArrayList;
-
-import be.pxl.minecraftguide.model.Video;
+import be.pxl.minecraftguide.events.SensorActivity;
 import be.pxl.minecraftguide.providers.VideoProvider;
-
-
-import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ListActivity;
 import android.content.ActivityNotFoundException;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.database.Cursor;
+import android.hardware.Sensor;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Toast;
 
-public class Videos extends Activity {
+public class Videos extends ListActivity {
+	private SimpleCursorAdapter adaptor;
+	private SensorManager sensorManager;
+	private Sensor acceleroMeter;
+	private SensorEventListener sensorListener;
 
-	private ListView listView1;
-    private ArrayList<Video> m_command = null;
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.videos);
+
+		if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+			setContentView(R.layout.listview);
+		else
+			setContentView(R.layout.listview_landscape);
+
+		ContentResolver cr = getContentResolver();
+		Cursor cursor = cr.query(VideoProvider.CONTENT_URI, null, null, null,
+				null);
+		String[] from = { VideoProvider.COL_VIDID, VideoProvider.COL_VIDIMG,
+				VideoProvider.COL_VIDDESC, VideoProvider.COL_VIDURL };
+		int[] to = { R.id.txtID, R.id.imgItem, R.id.txtDescription, R.id.txtURL };
+		adaptor = new SimpleCursorAdapter(getApplicationContext(),
+				R.layout.rowview_videos, cursor, from, to, 0);
+		sensorListener = new SensorActivity(getListView(), adaptor);
 		
-m_command = new ArrayList<Video>();
-        
-		Video temp = new Video(R.drawable.minecrafttrailer, "Minecraft Trailer", "http://www.youtube.com/watch?v=MmB9b5njVbA");
-        m_command.add(temp);
-        temp = new Video(R.drawable.firstshelter, "Your First Shelter in Minecraft ", "http://www.youtube.com/watch?v=ylVtj-1Ccgg");
-        m_command.add(temp);
-        temp = new Video(R.drawable.startinghouse, "Minecraft: Building a Starting House", "http://www.youtube.com/watch?v=qss4uy6C_g0&feature=fvwrel");
-        m_command.add(temp);
-        temp = new Video(R.drawable.surviving, "Minecraft Tutorials : E01 How to Survive your First Night", "http://www.youtube.com/watch?v=B36Ehzf2cxE");
-        m_command.add(temp);
-        temp = new Video(R.drawable.top5, "Top 5 Minecraft creations houses", "http://www.youtube.com/watch?v=kzQQOMCxTp4&feature=fvwrel");
-        m_command.add(temp);
-
-        
-        VideoProvider provider = new VideoProvider(this, R.layout.rowview, m_command);
-        
-        listView1 = (ListView)findViewById(R.id.listView1);
-
-        listView1.setAdapter(provider);
-        
-        
-        listView1.setOnItemClickListener(new OnItemClickListener(){
-        	public void onItemClick(AdapterView<?> parent, View view,
-                    int position, long id) {
+		sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+		acceleroMeter = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+		sensorManager.registerListener(sensorListener, acceleroMeter, SensorManager.SENSOR_DELAY_UI);
+		
+		setListAdapter(adaptor);
+		
+		getListView().setOnItemClickListener(new OnItemClickListener(){
+        	
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
        
         			//Toast.makeText(getApplicationContext(), "dit is een test", Toast.LENGTH_LONG).show();
         			
@@ -61,10 +65,11 @@ m_command = new ArrayList<Video>();
 	        		Boolean isInternetPresent = cd.isConnectingToInternet(); // true or false
 	        		if (isInternetPresent)
 	        		{
-	                    String product = m_command.get(position).text.toString();
+	        			TextView txtURL = (TextView)view.findViewById(R.id.txtURL);
+	        			String videoURL = txtURL.getText().toString(); 
 	                    
 	                    Intent videoClient = new Intent(Intent.ACTION_VIEW);
-	                    videoClient.setData(Uri.parse(product));
+	                    videoClient.setData(Uri.parse(videoURL));
 	                    videoClient.setClassName("com.google.android.youtube", "com.google.android.youtube.PlayerActivity");
 	                    try{
 	                        startActivity(videoClient);
@@ -84,10 +89,31 @@ m_command = new ArrayList<Video>();
 	                            "You don't have internet connection.", false);
 	        		}
                 }
-        });
+		});
+	}
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		sensorManager.unregisterListener(sensorListener);
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		sensorManager.registerListener(sensorListener, acceleroMeter,
+				SensorManager.SENSOR_DELAY_UI);
+	}
+
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		// TODO Auto-generated method stub
+		super.onConfigurationChanged(newConfig);
+		// geluid misschien afspelen ?
 	}
 	
-	@SuppressWarnings("deprecation")
 	public void showAlertDialog(Context context, String title, String message, Boolean status) {
         AlertDialog alertDialog = new AlertDialog.Builder(context).create();
  
@@ -101,7 +127,7 @@ m_command = new ArrayList<Video>();
         alertDialog.setIcon(R.drawable.fail);
  
         // Setting OK Button
-        alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+        alertDialog.setButton(DialogInterface.BUTTON_POSITIVE,"OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
             }
         });

@@ -433,7 +433,6 @@ public final class R {
         public static final int imgItem=0x7f080023;
         public static final int imgResult=0x7f08001f;
         public static final int imgResultBox=0x7f08001e;
-        public static final int listView1=0x7f080025;
         public static final int rowView=0x7f080021;
         public static final int txtAppName=0x7f080000;
         public static final int txtDescription=0x7f080024;
@@ -444,6 +443,7 @@ public final class R {
         public static final int txtIngredients=0x7f08000a;
         public static final int txtRelatedRecipes=0x7f080020;
         public static final int txtResult=0x7f08001d;
+        public static final int txtURL=0x7f080025;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -457,7 +457,7 @@ public final class R {
         public static final int recipedetails=0x7f030008;
         public static final int recipedetails_landscape=0x7f030009;
         public static final int rowview=0x7f03000a;
-        public static final int videos=0x7f03000b;
+        public static final int rowview_videos=0x7f03000b;
     }
     public static final class menu {
         public static final int main=0x7f070000;
