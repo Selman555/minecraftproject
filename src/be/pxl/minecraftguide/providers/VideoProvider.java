@@ -55,9 +55,6 @@ public class VideoProvider extends ContentProvider {
 		videoList.add(new Video(3, R.drawable.startinghouse,
 				"Minecraft: Building a Starting House",
 				"http://www.youtube.com/watch?v=qss4uy6C_g0"));
-		videoList.add(new Video(1, R.drawable.minecrafttrailer,
-				"Minecraft Trailer",
-				"http://www.youtube.com/watch?v=MmB9b5njVbA"));
 		videoList.add(new Video(4, R.drawable.surviving,
 				"Minecraft Tutorials : E01 How to Survive your First Night",
 				"http://www.youtube.com/watch?v=B36Ehzf2cxE"));
