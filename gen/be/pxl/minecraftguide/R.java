@@ -405,47 +405,45 @@ public final class R {
         public static final int zombie_head=0x7f02017d;
     }
     public static final class id {
-        public static final int action_settings=0x7f080028;
+        public static final int action_settings=0x7f080026;
         public static final int btnCrafting=0x7f080001;
-        public static final int btnItemList=0x7f080002;
-        public static final int btnServerCommands=0x7f080003;
-        public static final int btnVideos=0x7f080004;
-        public static final int commanddetails=0x7f08000a;
-        public static final int commandsLayout=0x7f080008;
-        public static final int commandslist=0x7f080009;
-        public static final int imgBox1=0x7f08000d;
-        public static final int imgBox2=0x7f08000f;
-        public static final int imgBox3=0x7f080011;
-        public static final int imgBox4=0x7f080013;
-        public static final int imgBox5=0x7f080015;
-        public static final int imgBox6=0x7f080017;
-        public static final int imgBox7=0x7f080019;
-        public static final int imgBox8=0x7f08001b;
-        public static final int imgBox9=0x7f08001d;
-        public static final int imgIngr1=0x7f08000e;
-        public static final int imgIngr2=0x7f080010;
-        public static final int imgIngr3=0x7f080012;
-        public static final int imgIngr4=0x7f080014;
-        public static final int imgIngr5=0x7f080016;
-        public static final int imgIngr6=0x7f080018;
-        public static final int imgIngr7=0x7f08001a;
-        public static final int imgIngr8=0x7f08001c;
-        public static final int imgIngr9=0x7f08001e;
-        public static final int imgItem=0x7f080025;
-        public static final int imgResult=0x7f080021;
-        public static final int imgResultBox=0x7f080020;
-        public static final int listView1=0x7f080027;
-        public static final int rowView=0x7f080023;
-        public static final int textView1=0x7f080000;
-        public static final int txtAppName=0x7f080005;
-        public static final int txtDescription=0x7f080026;
-        public static final int txtFragCommandDesc=0x7f080007;
-        public static final int txtFragCommandTitle=0x7f080006;
-        public static final int txtFragID=0x7f08000b;
-        public static final int txtID=0x7f080024;
-        public static final int txtIngredients=0x7f08000c;
-        public static final int txtRelatedRecipes=0x7f080022;
-        public static final int txtResult=0x7f08001f;
+        public static final int btnServerCommands=0x7f080002;
+        public static final int btnVideos=0x7f080003;
+        public static final int commanddetails=0x7f080008;
+        public static final int commandsLayout=0x7f080006;
+        public static final int commandslist=0x7f080007;
+        public static final int imgBox1=0x7f08000b;
+        public static final int imgBox2=0x7f08000d;
+        public static final int imgBox3=0x7f08000f;
+        public static final int imgBox4=0x7f080011;
+        public static final int imgBox5=0x7f080013;
+        public static final int imgBox6=0x7f080015;
+        public static final int imgBox7=0x7f080017;
+        public static final int imgBox8=0x7f080019;
+        public static final int imgBox9=0x7f08001b;
+        public static final int imgIngr1=0x7f08000c;
+        public static final int imgIngr2=0x7f08000e;
+        public static final int imgIngr3=0x7f080010;
+        public static final int imgIngr4=0x7f080012;
+        public static final int imgIngr5=0x7f080014;
+        public static final int imgIngr6=0x7f080016;
+        public static final int imgIngr7=0x7f080018;
+        public static final int imgIngr8=0x7f08001a;
+        public static final int imgIngr9=0x7f08001c;
+        public static final int imgItem=0x7f080023;
+        public static final int imgResult=0x7f08001f;
+        public static final int imgResultBox=0x7f08001e;
+        public static final int listView1=0x7f080025;
+        public static final int rowView=0x7f080021;
+        public static final int txtAppName=0x7f080000;
+        public static final int txtDescription=0x7f080024;
+        public static final int txtFragCommandDesc=0x7f080005;
+        public static final int txtFragCommandTitle=0x7f080004;
+        public static final int txtFragID=0x7f080009;
+        public static final int txtID=0x7f080022;
+        public static final int txtIngredients=0x7f08000a;
+        public static final int txtRelatedRecipes=0x7f080020;
+        public static final int txtResult=0x7f08001d;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -494,17 +492,14 @@ public final class R {
         Base application theme for API 11+. This theme completely replaces
         AppBaseTheme from res/values/styles.xml on API 11+ devices.
     
- API 11 theme customizations can go here. 
 
         Base application theme for API 14+. This theme completely replaces
         AppBaseTheme from BOTH res/values/styles.xml and
         res/values-v11/styles.xml on API 14+ devices.
     
- API 14 theme customizations can go here. 
          */
         public static final int AppBaseTheme=0x7f060000;
         /**  Application theme. 
- All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f060001;
         public static final int ButtonTheme=0x7f060002;

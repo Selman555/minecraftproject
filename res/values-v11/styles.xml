@@ -6,9 +6,15 @@
     -->
     <style name="AppBaseTheme" parent="android:Theme.Holo.Light">
         <!-- API 11 theme customizations can go here. -->
+        <item name="android:button">@style/ButtonTheme</item>
     </style>
-
+    
     <style name="ButtonTheme" parent="android:Widget.Button">
-		<item name="android:alpha">0.5</item>
+		<item name="android:alpha">0.8</item>
+		<item name="android:textColor">@android:color/white</item>
+ 		<item name="android:background">@drawable/button_selector</item>
+ 		<item name="android:textSize">18sp</item>
+ 		<item name="android:layout_width">200dp</item>
+ 		<item name="android:layout_height">wrap_content</item>
 	</style>
 </resources>
