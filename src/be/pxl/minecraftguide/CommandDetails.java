@@ -15,8 +15,6 @@ public class CommandDetails extends Fragment {
 			Bundle savedInstanceState) {
 		Bundle extras = getArguments();
 		if (extras != null) {
-			String[] test = savedInstanceState.getStringArray("detail");
-			String[] test2 = test;
 			detailValues = savedInstanceState.getStringArray("detail");
 		}
 		
@@ -35,7 +33,8 @@ public class CommandDetails extends Fragment {
 		setTextFields();
 		super.onStart();
 	}
-	
+
+
 	public void setTextFields() {
 		TextView title = (TextView)getView().findViewById(R.id.txtFragCommandTitle);
 		TextView desc = (TextView) getView().findViewById(R.id.txtFragCommandDesc);

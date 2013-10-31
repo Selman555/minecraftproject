@@ -12,6 +12,7 @@ public class Commands extends FragmentActivity implements CommandsList.OnListIte
 	//____________BRON: http://developer.android.com/training/basics/fragments/communicating.html
 	private List<Command> commands; //Lijst van alle bestaande commandos
 	private static String[][] detailValues; //Lijst van alle waarden voor het detailgedeelte
+	private static int position;
 	public static String[] listValues; //Lijst van alle waarden voor de lijst
 	
 	@Override
@@ -19,6 +20,12 @@ public class Commands extends FragmentActivity implements CommandsList.OnListIte
 		super.onCreate(arg0);
 		createCommands();
 		setContentView(R.layout.commands);
+		if (position != 0) {
+			CommandDetails details = (CommandDetails) getSupportFragmentManager().findFragmentById(R.id.commanddetails);
+			if (details != null) {
+				details.updateArticleView(detailValues[position]);
+			}
+		}
 	}
 	
 	/***
@@ -55,15 +62,15 @@ public class Commands extends FragmentActivity implements CommandsList.OnListIte
 				"Changes the difficulty. The difficulties can be abbreviated to p/e/n/h or 0/1/2/3 respectively."));
 		commands.add(new Command(13, "Server commands", "gamerule <rulename> [true | false]",
 				"Activates or deactivates the rulename. If true/false is not given, displays the current status of rulename. Available rules are:" +
-				"\r\n- commandBlockOutput - Whether command blocks should notify admins when they perform commands." +
-				"\r\ndoFireTick - Whether fire should spread." +
-				"\r\ndoMobLoot - Whether mobs should drop items." +
-				"\r\ndoMobSpawning - Whether mobs should naturally spawn." +
-				"\r\ndoTileDrops - Whether blocks should have drops." +
-				"\r\nkeepInventory - Whether the player should keep items in their inventory if they die." +
-				"\r\nmobGriefing - Whether creepers, endermen, ghasts, and withers should be able to change blocks, or zombies, skeletons, and zombie pigmen can pick up items." +
-				"\r\nnaturalRegeneration - Whether the player can regenerate health naturally if their hunger is at a regenerable state." +
-				"\r\ndoDaylightCycle - Whether the day/night cycle is in effect or not."));
+				"\r\n\r\ncommandBlockOutput - Whether command blocks should notify admins when they perform commands." +
+				"\r\n\r\ndoFireTick - Whether fire should spread." +
+				"\r\n\r\ndoMobLoot - Whether mobs should drop items." +
+				"\r\n\r\ndoMobSpawning - Whether mobs should naturally spawn." +
+				"\r\n\r\ndoTileDrops - Whether blocks should have drops." +
+				"\r\n\r\nkeepInventory - Whether the player should keep items in their inventory if they die." +
+				"\r\n\r\nmobGriefing - Whether creepers, endermen, ghasts, and withers should be able to change blocks, or zombies, skeletons, and zombie pigmen can pick up items." +
+				"\r\n\r\nnaturalRegeneration - Whether the player can regenerate health naturally if their hunger is at a regenerable state." +
+				"\r\n\r\ndoDaylightCycle - Whether the day/night cycle is in effect or not."));
 		commands.add(new Command(14, "Environment commands", "time set <number | day | night>",
 				"Sets the world time. Number is an integer between 0 and 24000, inclusive, where 0 is dawn, 6000 midday, 12000 dusk and 18000 midnight."));
 		commands.add(new Command(15, "Environment commands", "time add <number>",
@@ -86,7 +93,9 @@ public class Commands extends FragmentActivity implements CommandsList.OnListIte
 
 	
 	@Override
-	public void onListItemSelected(int position) {
+	public void onListItemSelected(int selectedPosition) {
+		position = selectedPosition;
+		
 		CommandDetails details = (CommandDetails) getSupportFragmentManager().findFragmentById(R.id.commanddetails);
 		if (details != null) {
 			details.updateArticleView(detailValues[position]);

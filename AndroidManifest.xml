@@ -73,12 +73,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <!-- <activity android:name="Recipes" android:label="@string/recipes">
-        	<meta-data
-                android:name="android.support."
-                android:configChanges="orientation|keyboardHidden"
-                android:value=".Crafting" />
-        </activity>-->
+		<service android:name="BackgroundMusicPlayer"
+		    	 android:label="Background music player" >
+		</service>
     </application>
 
 </manifest>

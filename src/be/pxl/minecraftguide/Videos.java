@@ -94,17 +94,15 @@ public class Videos extends ListActivity {
 
 	@Override
 	protected void onPause() {
-		// TODO Auto-generated method stub
-		super.onPause();
 		sensorManager.unregisterListener(sensorListener);
+		super.onPause();
 	}
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
-		super.onResume();
 		sensorManager.registerListener(sensorListener, acceleroMeter,
 				SensorManager.SENSOR_DELAY_UI);
+		super.onResume();
 	}
 
 	@Override

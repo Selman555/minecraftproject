@@ -13,6 +13,9 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
@@ -22,7 +25,6 @@ import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.database.MatrixCursor.RowBuilder;
 import android.net.Uri;
-import android.util.Log;
 import be.pxl.minecraftguide.R;
 import be.pxl.minecraftguide.model.Recipe;
 
@@ -143,22 +145,31 @@ public class RecipeProvider extends ContentProvider {
 	}
 	
 	public static void GetItems() {
-		//___________BRON: http://stackoverflow.com/questions/19642445/java-convert-json-array-to-typed-listt
+		//___________BRON (JSON): http://stackoverflow.com/questions/19642445/java-convert-json-array-to-typed-listt
+		//___________BRON (TIMOUT): http://stackoverflow.com/questions/693997/how-to-set-httpresponse-timeout-for-android-in-java
 		new Thread(new Runnable() {
-		    //Thread to stop network calls on the UI thread
+		    //Netwerkconnecties uit de UI thread halen
 		    public void run() {
 				BufferedReader reader = null;
-				HttpClient client = new DefaultHttpClient();
 		
 				try {
-					// create GET request
+					// GET Request
 					HttpGet httpGet = new HttpGet("http://192.168.0.251:8084/MinecraftRestServer/webresources/Items");
-					// execute GET request
+					HttpParams httpParameters = new BasicHttpParams();
+					// Tijd in ms hoelang er gewacht wordt op verbinding met de webservice
+					int timeoutConnection = 3000;
+					HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
+					// Tijd in ms hoelang er na connectie op data gewacht moet worden.
+					int timeoutSocket = 5000;
+					HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
+					HttpClient client = new DefaultHttpClient(httpParameters);
+					
+					// GET Request uitvoeren
 					HttpResponse response = client.execute(httpGet);
-					// check response
+					// Antwoord controlleren
 					StatusLine statusLine = response.getStatusLine();
 					int statusCode = statusLine.getStatusCode();
-					if (statusCode == 200) { // response OK
+					if (statusCode == 200) { // 200 == OK
 						// Response uitlezen
 						HttpEntity entity = response.getEntity();
 						// Inputstream om uit te lezen
@@ -170,12 +181,12 @@ public class RecipeProvider extends ContentProvider {
 						//TypeToken omschrijft de vormgeving van de ontvangen json array
 						recipesList = gson.fromJson(reader, new TypeToken<List<Recipe>>(){}.getType());
 					} else {
-						Log.e(getClass().getName().toString(), "Failed to download file");
+						errorMessage = "The webservice could not answer your request";
 					}
-				} catch (ClientProtocolException e) {
-					errorMessage = "Connection to webservice failed";
-				} catch (IOException e) {
-					errorMessage = "Internet connection required";
+				} catch (ClientProtocolException cpex) {
+					errorMessage = "Could not load data at this moment";
+				} catch (IOException ioex) {
+					errorMessage = "Could not connect to the webservice";
 				} catch (IllegalArgumentException iae) {
 					errorMessage = "Some received data could not be processed";
 				} finally {

@@ -33,47 +33,47 @@ public class Recipes extends ListActivity {
 		else
 			setContentView(R.layout.listview_landscape);
 		
-		while (RecipeProvider.busy) {
+		while (RecipeProvider.busy) { //Zolang de lijst in RecipeProvider nog opgehaald wordt,
 			try {
-				Thread.sleep(100);
+				Thread.sleep(100); // wachten tot thread in RecipeProvider klaar is
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				RecipeProvider.errorMessage = "Could not load list";
 			}
 		}
 		if (RecipeProvider.errorMessage != null) {
 			Toast notice = Toast.makeText(getApplicationContext(), RecipeProvider.errorMessage, Toast.LENGTH_LONG);
 			notice.show();
-			finish();
-		}
-		
-		Bundle extras = getIntent().getExtras();
-		String id = Integer.toString(extras.getInt("listIndex"));
-		
-		ContentResolver cr = getContentResolver();
-		Cursor cursor = cr.query(RecipeProvider.CONTENT_URI, new String[] { id.toString() }, null, null, null);
-		String[] from = {RecipeProvider.COL_RECID, RecipeProvider.COL_RECIMGID, RecipeProvider.COL_RECDESC};
-		int[] to = { R.id.txtID, R.id.imgItem, R.id.txtDescription };
-		adaptor = new SimpleCursorAdapter(getApplicationContext(), R.layout.rowview, cursor, from, to, 0);
-		
-		setListAdapter(adaptor);
-		
-		sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-		acceleroMeter = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-		sensorListener = new SensorActivity(getListView(), adaptor);
-		sensorManager.registerListener(sensorListener, acceleroMeter, SensorManager.SENSOR_DELAY_UI);
-		
-		getListView().setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View row, int rowIndex, long arg3) {
-				Intent recipeDetailsIntent = new Intent(getApplicationContext(), RecipeDetails.class);
-				TextView txtID = (TextView)row.findViewById(R.id.txtID);
-				recipeDetailsIntent.putExtra("recipeID", Integer.parseInt(txtID.getText().toString()));
-				startActivity(recipeDetailsIntent);
-			}
+			RecipeProvider.GetItems();
+			finish(); //Bericht tonen en activiteit afsluiten
+		} else {
+			Bundle extras = getIntent().getExtras();
+			String id = Integer.toString(extras.getInt("listIndex"));
 			
-		});
+			ContentResolver cr = getContentResolver();
+			Cursor cursor = cr.query(RecipeProvider.CONTENT_URI, new String[] { id.toString() }, null, null, null);
+			String[] from = {RecipeProvider.COL_RECID, RecipeProvider.COL_RECIMGID, RecipeProvider.COL_RECDESC};
+			int[] to = { R.id.txtID, R.id.imgItem, R.id.txtDescription };
+			adaptor = new SimpleCursorAdapter(getApplicationContext(), R.layout.rowview, cursor, from, to, 0);
+			
+			setListAdapter(adaptor);
+			
+			sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+			acceleroMeter = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+			sensorListener = new SensorActivity(getListView(), adaptor);
+			sensorManager.registerListener(sensorListener, acceleroMeter, SensorManager.SENSOR_DELAY_UI);
+			
+			getListView().setOnItemClickListener(new OnItemClickListener() {
+	
+				@Override
+				public void onItemClick(AdapterView<?> arg0, View row, int rowIndex, long arg3) {
+					Intent recipeDetailsIntent = new Intent(getApplicationContext(), RecipeDetails.class);
+					TextView txtID = (TextView)row.findViewById(R.id.txtID);
+					recipeDetailsIntent.putExtra("recipeID", Integer.parseInt(txtID.getText().toString()));
+					startActivity(recipeDetailsIntent);
+				}
+				
+			});
+		}
 	}
 
 	@Override

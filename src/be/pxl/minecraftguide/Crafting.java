@@ -39,24 +39,10 @@ public class Crafting extends ListActivity {
 		int[] to = { R.id.txtID, R.id.imgItem, R.id.txtDescription };
 		adaptor = new SimpleCursorAdapter(getApplicationContext(), R.layout.rowview, cursor, from, to, 0);
 		sensorListener = new SensorActivity(getListView(), adaptor);
-		/*SimpleCursorAdapter.ViewBinder viewBinder = new SimpleCursorAdapter.ViewBinder() {
-
-			@Override
-			public boolean setViewValue(View view, Cursor cursor, int arg2) {
-				if(view.getId() == R.id.imgCatImage) {
-					ImageView image = (ImageView)findViewById(R.id.imgCatImage);
-					image.setImageResource(R.drawable.ic_launcher);
-				}
-				
-				return false;
-			}
-			
-		};*/
 		
 		setListAdapter(adaptor);
 		
 		//__________BRON: http://stackoverflow.com/questions/18751878/android-using-the-accelerometer-to-create-a-simple-maraca-app_____________
-		
 		sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 		acceleroMeter = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 		sensorManager.registerListener(sensorListener, acceleroMeter, SensorManager.SENSOR_DELAY_UI);
@@ -73,20 +59,11 @@ public class Crafting extends ListActivity {
 			
 		});
 	}
-
-	/*@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
-		// TODO Auto-generated method stub
-		super.onListItemClick(l, v, position, id);
-		
-		int recipeID = Integer.parseInt(v.getTag().toString());
-	}*/
-
+	
 	@Override
 	protected void onPause() {
-		// TODO Auto-generated method stub
-		super.onPause();
 		sensorManager.unregisterListener(sensorListener); //De accelerometer afzetten (blijft aan zelfs in stand-by)
+		super.onPause();
 	}
 
 	@Override
@@ -100,7 +77,6 @@ public class Crafting extends ListActivity {
 	public void onConfigurationChanged(Configuration newConfig) {
 		// TODO Auto-generated method stub
 		super.onConfigurationChanged(newConfig);
-		//Iets te doen tijdens het veranderen van orientatie?
 	}
 
 }
