@@ -34,7 +34,6 @@ public class CommandDetails extends Fragment {
 		super.onStart();
 	}
 
-
 	public void setTextFields() {
 		TextView title = (TextView)getView().findViewById(R.id.txtFragCommandTitle);
 		TextView desc = (TextView) getView().findViewById(R.id.txtFragCommandDesc);
