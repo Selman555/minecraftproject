@@ -70,9 +70,12 @@ public class RecipeDetails extends ListActivity {
 			public void onItemClick(AdapterView<?> arg0, View row, int rowIndex, long arg3) {
 				Intent recipeDetailsIntent = new Intent(getApplicationContext(), RecipeDetails.class);
 				TextView txtID = (TextView)row.findViewById(R.id.txtID);
-				recipeDetailsIntent.putExtra("recipeID", Integer.parseInt(txtID.getText().toString()));
-				startActivity(recipeDetailsIntent);
-				finish();
+				int intID = Integer.parseInt(txtID.getText().toString());
+				if (intID != 0) {
+					recipeDetailsIntent.putExtra("recipeID", intID);
+					startActivity(recipeDetailsIntent);
+					finish();
+				}
 			}
 			
 		});
