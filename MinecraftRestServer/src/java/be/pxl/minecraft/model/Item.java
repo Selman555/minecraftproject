@@ -1,7 +1,5 @@
 package be.pxl.minecraft.model;
 
-import java.awt.Image;
-
 public class Item {
     private int _id;
     private int recipeCategory;
@@ -10,8 +8,8 @@ public class Item {
     private String recipeLocations;
     private String usedImages;
 
-    public Item(int recipeID, int recipeCategory, String recipeImageID, String recipeDescription, String recipeLocations, String usedImages) {
-        this._id = recipeID;
+    public Item(int _id, int recipeCategory, String recipeImageID, String recipeDescription, String recipeLocations, String usedImages) {
+        this._id = _id;
         this.recipeCategory = recipeCategory;
         this.recipeImageID = recipeImageID;
         this.recipeDescription = recipeDescription;
@@ -19,23 +17,23 @@ public class Item {
         this.usedImages = usedImages;
     }
 
-    public int getRecipeID() {
+    public int get_id() {
         return _id;
     }
 
-    public void setRecipeID(int recipeID) {
+    public void set_id(int recipeID) {
         this._id = recipeID;
     }
     
     public String getRecipeImageID() {
-		return recipeImageID;
-	}
+        return recipeImageID;
+    }
 
-	public void setRecipeImageID(String recipeImageID) {
-		this.recipeImageID = recipeImageID;
-	}
+    public void setRecipeImageID(String recipeImageID) {
+        this.recipeImageID = recipeImageID;
+    }
 
-	public int getRecipeCategory() {
+    public int getRecipeCategory() {
         return recipeCategory;
     }
 
@@ -59,11 +57,11 @@ public class Item {
         this.recipeLocations = recipeLocations;
     }
 
-	public String getUsedImages() {
-		return usedImages;
-	}
+    public String getUsedImages() {
+        return usedImages;
+    }
 
-	public void setUsedImages(String usedImages) {
-		this.usedImages = usedImages;
-	}
+    public void setUsedImages(String usedImages) {
+        this.usedImages = usedImages;
+    }
 }

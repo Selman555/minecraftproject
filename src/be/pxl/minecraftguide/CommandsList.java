@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 
@@ -28,8 +29,7 @@ public class CommandsList extends ListFragment {
 	    try {
 	        mCallback = (OnListItemSelectedListener) activity;
 	    } catch (ClassCastException e) {
-	        throw new ClassCastException(activity.toString()
-	                + " de activiteit is niet interactief.");
+	    	(Toast.makeText(this.getActivity().getApplicationContext(), "Could not pair command details.", Toast.LENGTH_LONG)).show();
 	    }
 	}
 	
