@@ -32,7 +32,8 @@
         android:layout_marginLeft="32dp"
         android:layout_below="@id/txtIngredients"
         android:src="@drawable/baked_potato"
-        android:contentDescription="@string/boxdesc" />
+        android:contentDescription="@string/boxdesc"
+        android:onClick="ingredientImageClicked" />
     
     <ImageView
         android:id="@+id/imgBox2"
@@ -51,7 +52,8 @@
         android:layout_toRightOf="@id/imgBox1"
         android:layout_alignBottom="@id/imgIngr1"
         android:src="@drawable/baked_potato"
-        android:contentDescription="@string/boxdesc" />
+        android:contentDescription="@string/boxdesc"
+        android:onClick="ingredientImageClicked" />
     
     <ImageView
         android:id="@+id/imgBox3"
@@ -70,7 +72,8 @@
         android:layout_toRightOf="@id/imgBox2"
         android:layout_alignBottom="@id/imgIngr2"
         android:src="@drawable/baked_potato"
-        android:contentDescription="@string/boxdesc" />
+        android:contentDescription="@string/boxdesc"
+        android:onClick="ingredientImageClicked" />
     
     <ImageView
         android:id="@+id/imgBox4"
@@ -89,7 +92,8 @@
         android:layout_alignLeft="@id/imgBox1"
         android:layout_below="@id/imgBox1"
         android:src="@drawable/baked_potato"
-        android:contentDescription="@string/boxdesc" />
+        android:contentDescription="@string/boxdesc"
+        android:onClick="ingredientImageClicked" />
     
     <ImageView
         android:id="@+id/imgBox5"
@@ -108,7 +112,8 @@
         android:layout_toRightOf="@id/imgBox4"
         android:layout_alignBottom="@id/imgIngr4"
         android:src="@drawable/baked_potato"
-        android:contentDescription="@string/boxdesc" />
+        android:contentDescription="@string/boxdesc"
+        android:onClick="ingredientImageClicked" />
     
     <ImageView
         android:id="@+id/imgBox6"
@@ -127,7 +132,8 @@
         android:layout_toRightOf="@id/imgBox5"
         android:layout_alignBottom="@id/imgIngr5"
         android:src="@drawable/baked_potato"
-        android:contentDescription="@string/boxdesc" />
+        android:contentDescription="@string/boxdesc"
+        android:onClick="ingredientImageClicked" />
     
     <ImageView
         android:id="@+id/imgBox7"
@@ -146,7 +152,8 @@
         android:layout_alignLeft="@id/imgBox4"
         android:layout_below="@id/imgBox4"
         android:src="@drawable/baked_potato"
-        android:contentDescription="@string/boxdesc" />
+        android:contentDescription="@string/boxdesc"
+        android:onClick="ingredientImageClicked" />
     
     <ImageView
         android:id="@+id/imgBox8"
@@ -165,7 +172,8 @@
         android:layout_toRightOf="@id/imgBox7"
         android:layout_alignBottom="@id/imgIngr7"
         android:src="@drawable/baked_potato"
-        android:contentDescription="@string/boxdesc" />
+        android:contentDescription="@string/boxdesc"
+        android:onClick="ingredientImageClicked" />
     
     <ImageView
         android:id="@+id/imgBox9"
@@ -184,7 +192,8 @@
         android:layout_toRightOf="@id/imgBox8"
         android:layout_alignBottom="@id/imgIngr7"
         android:src="@drawable/baked_potato"
-        android:contentDescription="@string/boxdesc" />
+        android:contentDescription="@string/boxdesc"
+        android:onClick="ingredientImageClicked" />
 
     
     

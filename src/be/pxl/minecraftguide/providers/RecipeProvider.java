@@ -153,8 +153,13 @@ public class RecipeProvider extends ContentProvider {
 				BufferedReader reader = null;
 		
 				try {
+<<<<<<< HEAD
 					// GET Request 192.168.0.251
 					HttpGet httpGet = new HttpGet("http://192.168.42.59:8084/MinecraftRestServer/webresources/Items");
+=======
+					// GET Request
+					HttpGet httpGet = new HttpGet("http://192.168.43.190:8080/MinecraftRestServer/webresources/Items");
+>>>>>>> 3079a31cb116ccf3f34061cbca0141035eadb744
 					HttpParams httpParameters = new BasicHttpParams();
 					// Tijd in ms hoelang er gewacht wordt op verbinding met de webservice
 					int timeoutConnection = 3000;

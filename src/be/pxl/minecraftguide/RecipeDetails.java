@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import be.pxl.minecraftguide.providers.RecipeProvider;
 
 public class RecipeDetails extends ListActivity {
@@ -38,7 +39,6 @@ public class RecipeDetails extends ListActivity {
 		ImageView imgIngr8 = (ImageView) findViewById(R.id.imgIngr8);
 		ImageView imgIngr9 = (ImageView) findViewById(R.id.imgIngr9);
 		
-		
 		ContentResolver cr = getContentResolver();
 		Cursor cursor = cr.query(RecipeProvider.CONTENT_URI, null, id, null, null);
 		if (cursor.moveToFirst()) {
@@ -48,14 +48,23 @@ public class RecipeDetails extends ListActivity {
 			int[] imgLocations = createIntArrayFromString(cursor.getString(4), true);
 			int[] imgUsedImages = createIntArrayFromString(cursor.getString(5), false);
 			imgIngr1.setImageResource(imgUsedImages[imgLocations[0]]);
+			imgIngr1.setTag(imgUsedImages[imgLocations[0]]);
 			imgIngr2.setImageResource(imgUsedImages[imgLocations[1]]);
+			imgIngr2.setTag(imgUsedImages[imgLocations[1]]);
 			imgIngr3.setImageResource(imgUsedImages[imgLocations[2]]);
+			imgIngr3.setTag(imgUsedImages[imgLocations[2]]);
 			imgIngr4.setImageResource(imgUsedImages[imgLocations[3]]);
+			imgIngr4.setTag(imgUsedImages[imgLocations[3]]);
 			imgIngr5.setImageResource(imgUsedImages[imgLocations[4]]);
+			imgIngr5.setTag(imgUsedImages[imgLocations[4]]);
 			imgIngr6.setImageResource(imgUsedImages[imgLocations[5]]);
+			imgIngr6.setTag(imgUsedImages[imgLocations[5]]);
 			imgIngr7.setImageResource(imgUsedImages[imgLocations[6]]);
+			imgIngr7.setTag(imgUsedImages[imgLocations[6]]);
 			imgIngr8.setImageResource(imgUsedImages[imgLocations[7]]);
+			imgIngr8.setTag(imgUsedImages[imgLocations[7]]);
 			imgIngr9.setImageResource(imgUsedImages[imgLocations[8]]);
+			imgIngr9.setTag(imgUsedImages[imgLocations[8]]);
 		}
 		
 		cursor = cr.query(RecipeProvider.CONTENT_URI, null, null, new String[] { Integer.toString(cursor.getInt(2)) }, null);
@@ -90,5 +99,16 @@ public class RecipeDetails extends ListActivity {
 		}
 		
 		return arrIntArray;
+	}
+	
+	public void ingredientImageClicked(View v) {
+		ImageView image = (ImageView)v;
+		String tag = image.getTag().toString();
+		String imageName = getResources().getResourceName(Integer.parseInt(tag));
+		imageName = imageName.substring(0, 1).toUpperCase() + imageName.substring(1).replace("_", " ");
+		int nameIndex = imageName.lastIndexOf('/');
+		imageName = imageName.substring(nameIndex + 1, imageName.length());
+		
+		Toast.makeText(getApplicationContext(), "Info: " + imageName, Toast.LENGTH_LONG).show();
 	}
 }
