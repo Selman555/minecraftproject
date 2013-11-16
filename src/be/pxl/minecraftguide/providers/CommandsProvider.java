@@ -1,13 +1,14 @@
 package be.pxl.minecraftguide.providers;
 
 import java.util.List;
-import be.pxl.minecraftguide.model.Command;
+
 import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.database.MatrixCursor.RowBuilder;
 import android.net.Uri;
+import be.pxl.minecraftguide.model.Command;
 
 public class CommandsProvider extends ContentProvider {
 	public static final String COL_COMID = "_id";

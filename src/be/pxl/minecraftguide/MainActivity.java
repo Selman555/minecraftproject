@@ -3,15 +3,12 @@ package be.pxl.minecraftguide;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.View;
-import android.widget.Toast;
 import be.pxl.minecraftguide.providers.RecipeProvider;
 
 public class MainActivity extends Activity {
@@ -35,12 +32,12 @@ public class MainActivity extends Activity {
 		mp = MediaPlayer.create(MainActivity.this, R.raw.buttonclick); //knopgeluiden laden
 		super.onCreate(savedInstanceState);
 		
-		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+		/*SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
 		pref.edit().putBoolean("up-to-date", true);
 		
 		if(pref.getBoolean("up-to-date", true)){
 			Toast.makeText(getApplicationContext(), "dit is een test", Toast.LENGTH_LONG).show();
-		}
+		}*/
 	}
 	
 	@Override
@@ -60,10 +57,10 @@ public class MainActivity extends Activity {
         mp.start(); //Knopgeluid = kist openen in minecraft
         systemVibrator.vibrate(100);
         
+        if (RecipeProvider.isListNull())
+        	RecipeProvider.GetItems();
 		Intent crafting = new Intent(getApplicationContext(), Crafting.class);
         MainActivity.this.startActivity(crafting);
-        if (RecipeProvider.errorMessage == null)
-        	RecipeProvider.GetItems();
 	}
 	
 	public void commandsButtonClicked(View view) {

@@ -1,6 +1,5 @@
 package be.pxl.minecraftguide;
 
-import java.lang.reflect.Array;
 import java.util.concurrent.ExecutionException;
 
 import android.app.Activity;
@@ -97,5 +96,12 @@ public class Chat extends Activity {
 	public void onPause() {
 		run = false;
 		super.onPause();
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		run = true;
+		startChatThread();
 	}
 }

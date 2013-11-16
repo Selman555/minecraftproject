@@ -3,10 +3,10 @@ package be.pxl.minecraftguide;
 import java.util.ArrayList;
 import java.util.List;
 
-import be.pxl.minecraftguide.model.Command;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import be.pxl.minecraftguide.model.Command;
 
 public class Commands extends FragmentActivity implements CommandsList.OnListItemSelectedListener {
 	//____________BRON: http://developer.android.com/training/basics/fragments/communicating.html

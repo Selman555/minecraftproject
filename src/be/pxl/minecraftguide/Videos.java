@@ -1,7 +1,5 @@
 package be.pxl.minecraftguide;
 
-import be.pxl.minecraftguide.events.SensorActivity;
-import be.pxl.minecraftguide.providers.VideoProvider;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.ActivityNotFoundException;
@@ -19,8 +17,10 @@ import android.os.Bundle;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.TextView;
+import be.pxl.minecraftguide.events.SensorActivity;
+import be.pxl.minecraftguide.providers.VideoProvider;
 
 public class Videos extends ListActivity {
 	private SimpleCursorAdapter adaptor;

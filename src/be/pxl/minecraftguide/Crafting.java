@@ -12,10 +12,12 @@ import android.os.Bundle;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
 import be.pxl.minecraftguide.events.SensorActivity;
 import be.pxl.minecraftguide.providers.RecipeCategoryProvider;
+import be.pxl.minecraftguide.providers.RecipeProvider;
 
 public class Crafting extends ListActivity {
 	private SimpleCursorAdapter adaptor;
@@ -50,11 +52,17 @@ public class Crafting extends ListActivity {
 		getListView().setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View row, int rowIndex, long arg3) {				
-				Intent recipeCategoryIntent = new Intent(getApplicationContext(), Recipes.class);
-				TextView txtID = (TextView)row.findViewById(R.id.txtID);
-				recipeCategoryIntent.putExtra("listIndex", Integer.parseInt(txtID.getText().toString()));
-				startActivity(recipeCategoryIntent);
+			public void onItemClick(AdapterView<?> arg0, View row, int rowIndex, long arg3) {
+				if (!RecipeProvider.busy) {
+					Intent recipeCategoryIntent = new Intent(getApplicationContext(), Recipes.class);
+					TextView txtID = (TextView)row.findViewById(R.id.txtID);
+					recipeCategoryIntent.putExtra("listIndex", Integer.parseInt(txtID.getText().toString()));
+					startActivity(recipeCategoryIntent);
+				} else if (RecipeProvider.errorMessage != null) {
+					(Toast.makeText(getApplicationContext(), "An error occured, are you connected?", Toast.LENGTH_LONG)).show();
+				} else {
+					(Toast.makeText(getApplicationContext(), "Gathering data... please wait.", Toast.LENGTH_LONG)).show();
+				}
 			}
 			
 		});

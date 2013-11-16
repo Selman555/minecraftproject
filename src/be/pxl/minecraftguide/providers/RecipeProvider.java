@@ -58,7 +58,7 @@ public class RecipeProvider extends ContentProvider {
 	public String getType(Uri arg0) {
 		// TODO Auto-generated method stub
 		return null;
-	}
+	}	
 	@Override
 	public Uri insert(Uri arg0, ContentValues arg1) {
 		// TODO Auto-generated method stub
@@ -144,6 +144,13 @@ public class RecipeProvider extends ContentProvider {
 		return 0;
 	}
 	
+	public static boolean isListNull() {
+		if (recipesList == null) {
+			return true;
+		}
+		return false;
+	}
+	
 	public static void GetItems() {
 		//___________BRON (JSON): http://stackoverflow.com/questions/19642445/java-convert-json-array-to-typed-listt
 		//___________BRON (TIMOUT): http://stackoverflow.com/questions/693997/how-to-set-httpresponse-timeout-for-android-in-java
@@ -151,7 +158,7 @@ public class RecipeProvider extends ContentProvider {
 		    //Netwerkconnecties uit de UI thread halen
 		    public void run() {
 				BufferedReader reader = null;
-		
+				errorMessage = null;
 				try {
 					// GET Request
 					HttpGet httpGet = new HttpGet("http://192.168.0.233:8080/MinecraftRestServer/webresources/Items");

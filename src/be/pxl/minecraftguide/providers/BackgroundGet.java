@@ -15,9 +15,7 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 
-import android.app.Application;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 public class BackgroundGet extends AsyncTask<String, String, String>  {
 	private String chatSession;

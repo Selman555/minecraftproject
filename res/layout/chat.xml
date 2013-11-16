@@ -22,10 +22,11 @@
         android:layout_alignParentTop="true"
         android:ems="12"
         android:background="@android:color/black"
-        android:enabled="false"
         android:gravity="center_vertical|bottom"
         android:hint="Chat session open"
-        android:inputType="textMultiLine" />
+        android:enabled="false"
+        android:inputType="textMultiLine"
+        android:scrollbars="vertical" />
     
     <EditText
         android:id="@+id/txtInsertChat"

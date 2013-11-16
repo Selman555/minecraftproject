@@ -12,9 +12,9 @@ import android.os.Bundle;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
+import android.widget.Toast;
 import be.pxl.minecraftguide.events.SensorActivity;
 import be.pxl.minecraftguide.providers.RecipeProvider;
 
@@ -35,7 +35,7 @@ public class Recipes extends ListActivity {
 		
 		while (RecipeProvider.busy) { //Zolang de lijst in RecipeProvider nog opgehaald wordt,
 			try {
-				Thread.sleep(100); // wachten tot thread in RecipeProvider klaar is
+				Thread.sleep(20); // wachten tot thread in RecipeProvider klaar is
 			} catch (InterruptedException e) {
 				RecipeProvider.errorMessage = "Could not load list";
 			}
