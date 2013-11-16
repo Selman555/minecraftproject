@@ -36,7 +36,7 @@ public class ChatResourceResource {
      * @return an instance of java.lang.String
      */
     @GET
-    @Produces("application/string")
+    @Produces("application/String")
     public String getChat() {
         return chatSession;
     }
@@ -47,7 +47,7 @@ public class ChatResourceResource {
      * @return an HTTP response with content of the updated or created resource.
      */
     @PUT
-    @Consumes("application/string")
+    @Consumes("application/String")
     public void putChat(String chatInsert) {
         chatSession = chatSession.concat("\r\n"+chatInsert);
     }
