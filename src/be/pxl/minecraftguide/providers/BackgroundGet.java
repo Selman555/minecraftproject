@@ -7,7 +7,6 @@ import java.io.InputStreamReader;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -18,29 +17,39 @@ import org.apache.http.params.HttpParams;
 import android.os.AsyncTask;
 
 public class BackgroundGet extends AsyncTask<String, String, String>  {
-	String errorMessage;
-	String chatSession;
+	private String errorMessage;
+	private String chatSession;
+	// GET Request
+	private HttpGet httpGet;
+	private HttpParams httpParameters;
+	// Tijd in ms hoelang er gewacht wordt op verbinding met de webservice
+	private int timeoutConnection;
+	// Tijd in ms hoelang er na connectie op data gewacht moet worden.
+	private int timeoutSocket;
+	private HttpClient client;
+	
+	public BackgroundGet() {
+		// GET Request
+		httpGet = new HttpGet("http://192.168.0.233:8080/MinecraftRestServer/webresources/ChatResource");
+		httpParameters = new BasicHttpParams();
+		// Tijd in ms hoelang er gewacht wordt op verbinding met de webservice
+		timeoutConnection = 3000;
+		HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
+		// Tijd in ms hoelang er na connectie op data gewacht moet worden.
+		timeoutSocket = 5000;
+		HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
+		client = new DefaultHttpClient(httpParameters);
+	}
 	
 	@Override
 	protected String doInBackground(String... arg0) {
-		// GET Request
-		final HttpGet httpGet = new HttpGet("http://192.168.0.233:8080/MinecraftRestServer/webresources/Chat");
-		HttpParams httpParameters = new BasicHttpParams();
-		// Tijd in ms hoelang er gewacht wordt op verbinding met de webservice
-		int timeoutConnection = 3000;
-		HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
-		// Tijd in ms hoelang er na connectie op data gewacht moet worden.
-		int timeoutSocket = 5000;
-		HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
-		final HttpClient client = new DefaultHttpClient(httpParameters);
 
 		BufferedReader reader = null;
 		try {
 			// GET Request uitvoeren
 			HttpResponse response = client.execute(httpGet);
 			// Antwoord controlleren
-			StatusLine statusLine = response.getStatusLine();
-			int statusCode = statusLine.getStatusCode();
+			int statusCode = response.getStatusLine().getStatusCode();
 			if (statusCode == 200) { // 200 == OK
 				// Response uitlezen
 				HttpEntity entity = response.getEntity();
@@ -60,9 +69,18 @@ public class BackgroundGet extends AsyncTask<String, String, String>  {
 		}
 		
 		if (reader != null) {
-			return reader.toString();
+			StringBuilder builder = new StringBuilder();
+			String chatLine = "";
+			try {
+				while ((chatLine = reader.readLine()) != null) {
+				    builder.append(chatLine);
+				}
+				return builder.toString();
+			} catch (IOException e) {
+				return "Could not build chat session";
+			}
 		} else {
-			return "Welcome to MC Talk";
+			return "Could not communicate with the chat session.";
 		}
 	}
 	

@@ -4,9 +4,10 @@
  */
 package be.pxl.minecraft.rest;
 
+import be.pxl.minecraft.storage.ChatSessionStorage;
+import com.sun.jersey.api.core.InjectParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -20,25 +21,19 @@ import javax.ws.rs.Produces;
  */
 @Path("ChatResource")
 public class ChatResourceResource {
-    private String chatSession = "";
     
     @Context
     private UriInfo context;
+    private static final ChatSessionStorage UNIQUE_CHATSESSION = new ChatSessionStorage();
 
-    /**
-     * Creates a new instance of ChatResourceResource
-     */
     public ChatResourceResource() {
+        
     }
 
-    /**
-     * Retrieves representation of an instance of be.pxl.minecraft.rest.ChatResourceResource
-     * @return an instance of java.lang.String
-     */
     @GET
-    @Produces("application/String")
+    @Produces("application/string")
     public String getChat() {
-        return chatSession;
+        return UNIQUE_CHATSESSION.getChatSessionText();
     }
 
     /**
@@ -47,8 +42,8 @@ public class ChatResourceResource {
      * @return an HTTP response with content of the updated or created resource.
      */
     @PUT
-    @Consumes("application/String")
+    @Consumes("application/string")
     public void putChat(String chatInsert) {
-        chatSession = chatSession.concat("\r\n"+chatInsert);
+        UNIQUE_CHATSESSION.setChatSessionText(chatInsert);
     }
 }

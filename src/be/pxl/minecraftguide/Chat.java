@@ -1,49 +1,50 @@
 package be.pxl.minecraftguide;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.util.concurrent.ExecutionException;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.StatusLine;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPut;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.BasicResponseHandler;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
-
-import be.pxl.minecraftguide.model.Recipe;
-import be.pxl.minecraftguide.providers.BackgroundGet;
-import be.pxl.minecraftguide.providers.BackgroundPut;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import android.app.Activity;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+import be.pxl.minecraftguide.providers.BackgroundGet;
+import be.pxl.minecraftguide.providers.BackgroundPut;
 
 public class Chat extends Activity {
-	private String errorMessage;
 	private static boolean run = true;
-	private static BufferedReader reader;
-	private EditText txtChatSession = (EditText) findViewById(R.id.txtChatSession);
+	private String chatText = "";
+	private EditText txtChatSession;
+	private Handler handler; //ontvangt berichten indien chat geupdate wordt.
+	private Thread chatUpdater;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.chat);
+		txtChatSession = (EditText) findViewById(R.id.txtChatSession);
+		txtChatSession.setKeyListener(null);
+		
+		handler = new Handler(){
+			@Override
+			public void handleMessage(Message msg) {
+				if (msg.what == 1) {
+					StringBuilder builder = new StringBuilder();
+					String[] lines = msg.obj.toString().split("New_Line");
+					String chat = "";
+					for (int counter = 0; counter < lines.length; counter++) {
+						builder.append(lines[counter] + System.getProperty("line.separator"));
+					}
+
+					chat = builder.toString();
+					txtChatSession.setText(chat);
+				}
+				super.handleMessage(msg);
+			}
+		};
 		startChatThread();
 	}
 	
@@ -54,19 +55,34 @@ public class Chat extends Activity {
 	}
 	
 	public void sendChatButtonClicked(View v) {
-		new BackgroundPut().execute(((EditText)findViewById(R.id.txtInsertChat)).getText().toString());
+		new BackgroundPut().execute(new String[] { "["+android.os.Build.PRODUCT.toString()+"]  "
+				+((EditText)findViewById(R.id.txtInsertChat)).getText().toString()
+				+ "New_Line" });
 	}
 	
+	@Override
+	public void onBackPressed() {
+		run = false;
+		super.onBackPressed();
+	}
+
+	@Override
+	public void onPause() {
+		run = false;
+		super.onPause();
+	}
 	public void startChatThread() {
-		(new Runnable() {
-			
+		chatUpdater = new Thread(new Runnable() {
 			@Override
 			public void run() {
 				while(run) {
 					try {
-						String chatText = new BackgroundGet().execute().get();
-						txtChatSession.setText(chatText);
-						Thread.sleep(1000);
+						chatText = new BackgroundGet().execute().get();
+						Message msg = handler.obtainMessage();
+					    msg.what = 1;
+					    msg.obj = chatText;
+					    handler.sendMessage(msg);
+						Thread.sleep(500);
 					} catch (InterruptedException e) {
 						run = false;
 						(Toast.makeText(getApplicationContext(), "Your connection was interrupted", Toast.LENGTH_LONG)).show();
@@ -76,6 +92,7 @@ public class Chat extends Activity {
 					}
 				}
 			}
-		}).run();
+		});
+		chatUpdater.start();
 	}
 }

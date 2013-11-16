@@ -17,7 +17,7 @@ import be.pxl.minecraftguide.providers.RecipeProvider;
 public class MainActivity extends Activity {
 	private MediaPlayer mp;
 	public Intent backgroundMusicPlayer;
-	private Vibrator systemVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+	private Vibrator systemVibrator;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +28,9 @@ public class MainActivity extends Activity {
 		//_________BRON(MediaPlayer): http://stackoverflow.com/questions/3369068/android-play-sound-on-button-click-null-pointer-exception
 		backgroundMusicPlayer = new Intent(MainActivity.this, BackgroundMusicPlayer.class);
 		startService(backgroundMusicPlayer);
+		
+		//Vibrator instantieren voor button clicks
+		systemVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 		
 		mp = MediaPlayer.create(MainActivity.this, R.raw.buttonclick); //knopgeluiden laden
 		super.onCreate(savedInstanceState);
