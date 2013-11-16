@@ -49,6 +49,7 @@
         android:id="@+id/btnChat"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:layout_width="100dp"
         android:onClick="chatButtonClicked"
         android:text="@string/chat"
         style="@style/ButtonTheme" />

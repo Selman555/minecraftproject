@@ -17,7 +17,7 @@ import be.pxl.minecraftguide.providers.BackgroundPut;
 public class Chat extends Activity {
 	private static boolean run = true;
 	private String chatText = "";
-	private EditText txtChatSession;
+	private EditText txtChatSession, txtChatInsert;
 	private Handler handler; //ontvangt berichten indien chat geupdate wordt.
 	private Thread chatUpdater;
 	
@@ -27,6 +27,7 @@ public class Chat extends Activity {
 		setContentView(R.layout.chat);
 		txtChatSession = (EditText) findViewById(R.id.txtChatSession);
 		txtChatSession.setKeyListener(null);
+		txtChatInsert = (EditText) findViewById(R.id.txtInsertChat);
 		
 		handler = new Handler(){
 			@Override
@@ -58,19 +59,9 @@ public class Chat extends Activity {
 		new BackgroundPut().execute(new String[] { "["+android.os.Build.PRODUCT.toString()+"]  "
 				+((EditText)findViewById(R.id.txtInsertChat)).getText().toString()
 				+ "New_Line" });
+		txtChatInsert.setText("");
 	}
 	
-	@Override
-	public void onBackPressed() {
-		run = false;
-		super.onBackPressed();
-	}
-
-	@Override
-	public void onPause() {
-		run = false;
-		super.onPause();
-	}
 	public void startChatThread() {
 		chatUpdater = new Thread(new Runnable() {
 			@Override
@@ -94,5 +85,17 @@ public class Chat extends Activity {
 			}
 		});
 		chatUpdater.start();
+	}
+	
+	@Override
+	public void onBackPressed() {
+		run = false;
+		super.onBackPressed();
+	}
+
+	@Override
+	public void onPause() {
+		run = false;
+		super.onPause();
 	}
 }

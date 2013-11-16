@@ -14,10 +14,12 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
+
+import android.app.Application;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 public class BackgroundGet extends AsyncTask<String, String, String>  {
-	private String errorMessage;
 	private String chatSession;
 	// GET Request
 	private HttpGet httpGet;
@@ -58,14 +60,14 @@ public class BackgroundGet extends AsyncTask<String, String, String>  {
 				// BufferedReader van de inputstream
 				reader = new BufferedReader(new InputStreamReader(content));
 			} else {
-				errorMessage = "The webservice could not answer your request";
+				return "The webservice could not answer your request";
 			}
 		} catch (ClientProtocolException cpex) {
-			errorMessage = "Could not load data at this moment";
+			return "Could not load data at this moment";
 		} catch (IOException ioex) {
-			errorMessage = "Could not connect to the webservice";
+			return "Could not connect to the webservice";
 		} catch (IllegalArgumentException iae) {
-			errorMessage = "Some received data could not be processed";
+			return "Some received data could not be processed";
 		}
 		
 		if (reader != null) {

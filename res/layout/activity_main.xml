@@ -46,12 +46,13 @@
         android:text="@string/videos"
         style="@style/ButtonTheme" />
     
-    <Button 
+    <Button
         android:id="@+id/btnChat"
+        style="@style/ButtonTheme"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:layout_width="100dp"
         android:onClick="chatButtonClicked"
-        android:text="@string/chat"
-        style="@style/ButtonTheme" />
+        android:text="@string/chat" />
 
 </RelativeLayout>
